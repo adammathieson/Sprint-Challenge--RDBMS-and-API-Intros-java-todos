@@ -1,7 +1,7 @@
 package com.lambdaschool.todos.controller;
 
-import com.lambdaschool.authenticatedusers.model.Role;
-import com.lambdaschool.authenticatedusers.service.RoleService;
+import com.lambdaschool.todos.model.Role;
+import com.lambdaschool.todos.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
