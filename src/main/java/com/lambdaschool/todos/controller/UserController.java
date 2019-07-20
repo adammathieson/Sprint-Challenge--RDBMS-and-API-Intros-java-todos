@@ -1,6 +1,8 @@
 package com.lambdaschool.todos.controller;
 
+import com.lambdaschool.todos.model.Todo;
 import com.lambdaschool.todos.model.User;
+import com.lambdaschool.todos.service.TodoService;
 import com.lambdaschool.todos.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -24,6 +26,9 @@ public class UserController
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TodoService todoService;
 
     @GetMapping(value = "/getusername", produces = {"application/json"})
     @ResponseBody
@@ -54,6 +59,15 @@ public class UserController
     {
         User u = userService.findUserById(userId);
         return new ResponseEntity<>(u, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/todo/{userid}", consumes = {"application/json"}, produces = {"application/json"})
+    public ResponseEntity<?> addTodo(@Valid @RequestBody Todo todo, @PathVariable long userid)
+    {
+        todo.setUser(userService.findUserById(userid));
+        todo = todoService.save(todo);
+
+        return new ResponseEntity<>(todo, HttpStatus.OK);
     }
 
 

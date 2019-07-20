@@ -17,9 +17,9 @@ public interface TodoService
 
     void delete(long id);
 
-    Todo save(Todo quote);
+    Todo save(Todo todo);
 
-    Todo update(Todo quote, long id);
+    Todo update(Todo todo, long id);
 
     ArrayList<CountTodos> getCountTodos();
 }
