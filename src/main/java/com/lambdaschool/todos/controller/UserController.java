@@ -69,8 +69,7 @@ public class UserController
 
         return new ResponseEntity<>(todo, HttpStatus.OK);
     }
-
-
+    
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping(value = "/user", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<?> addNewUser(@Valid @RequestBody User newuser) throws URISyntaxException
