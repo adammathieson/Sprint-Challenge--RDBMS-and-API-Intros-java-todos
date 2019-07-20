@@ -30,11 +30,10 @@ public class Todo extends Auditable
     {
     }
 
-    public Todo(String todo, Date datestarted, boolean completed, User user)
+    public Todo(String todo, Date datestarted, User user)
     {
         this.todo = todo;
         this.datestarted = datestarted;
-        this.completed = completed;
         this.user = user;
     }
 
@@ -43,6 +42,7 @@ public class Todo extends Auditable
         this.todo = todo;
         this.user = user;
     }
+
 
     public long getTodoid()
     {
