@@ -61,15 +61,26 @@ public class UserController
         return new ResponseEntity<>(u, HttpStatus.OK);
     }
 
-    @PostMapping(value = "/todo/{userid}", consumes = {"application/json"}, produces = {"application/json"})
-    public ResponseEntity<?> addTodo(@Valid @RequestBody Todo todo, @PathVariable long userid)
+//    @PostMapping(value = "/todo/{userid}", consumes = {"application/json"}, produces = {"application/json"})
+//    public ResponseEntity<?> addTodo(@Valid @RequestBody Todo todo, @PathVariable long userid)
+//    {
+//        todo.setUser(userService.findUserById(userid));
+//        todo = todoService.save(todo);
+//
+//        return new ResponseEntity<>(todo, HttpStatus.OK);
+//    }
+
+    // Stretch - only user can post todo
+    @PostMapping(value = "/todo", consumes = {"application/json"}, produces = {"application/json"})
+    public ResponseEntity<?> addTodo(@Valid @RequestBody Todo todo)
     {
-        todo.setUser(userService.findUserById(userid));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        todo.setUser(userService.findUserByName(authentication.getName()));
         todo = todoService.save(todo);
 
         return new ResponseEntity<>(todo, HttpStatus.OK);
     }
-    
+
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @PostMapping(value = "/user", consumes = {"application/json"}, produces = {"application/json"})
     public ResponseEntity<?> addNewUser(@Valid @RequestBody User newuser) throws URISyntaxException
